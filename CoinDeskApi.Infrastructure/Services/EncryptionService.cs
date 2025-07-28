@@ -15,7 +15,7 @@ namespace CoinDeskApi.Infrastructure.Services
             using var encryptor = aes.CreateEncryptor();
             var plainBytes = Encoding.UTF8.GetBytes(plainText);
             var encryptedBytes = encryptor.TransformFinalBlock(plainBytes, 0, plainBytes.Length);
-            
+
             return Convert.ToBase64String(encryptedBytes);
         }
 
@@ -28,7 +28,7 @@ namespace CoinDeskApi.Infrastructure.Services
             using var decryptor = aes.CreateDecryptor();
             var encryptedBytes = Convert.FromBase64String(cipherText);
             var decryptedBytes = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
-            
+
             return Encoding.UTF8.GetString(decryptedBytes);
         }
 
@@ -37,7 +37,7 @@ namespace CoinDeskApi.Infrastructure.Services
             using var rsa = RSA.Create(2048);
             var publicKey = Convert.ToBase64String(rsa.ExportRSAPublicKey());
             var privateKey = Convert.ToBase64String(rsa.ExportRSAPrivateKey());
-            
+
             return (publicKey, privateKey);
         }
 
@@ -45,10 +45,10 @@ namespace CoinDeskApi.Infrastructure.Services
         {
             using var rsa = RSA.Create();
             rsa.ImportRSAPublicKey(Convert.FromBase64String(publicKey), out _);
-            
+
             var plainBytes = Encoding.UTF8.GetBytes(plainText);
             var encryptedBytes = rsa.Encrypt(plainBytes, RSAEncryptionPadding.OaepSHA256);
-            
+
             return Convert.ToBase64String(encryptedBytes);
         }
 
@@ -56,10 +56,10 @@ namespace CoinDeskApi.Infrastructure.Services
         {
             using var rsa = RSA.Create();
             rsa.ImportRSAPrivateKey(Convert.FromBase64String(privateKey), out _);
-            
+
             var encryptedBytes = Convert.FromBase64String(cipherText);
             var decryptedBytes = rsa.Decrypt(encryptedBytes, RSAEncryptionPadding.OaepSHA256);
-            
+
             return Encoding.UTF8.GetString(decryptedBytes);
         }
 
@@ -67,12 +67,12 @@ namespace CoinDeskApi.Infrastructure.Services
         {
             var keyBytes = Encoding.UTF8.GetBytes(key);
             var result = new byte[length];
-            
+
             for (int i = 0; i < length; i++)
             {
                 result[i] = keyBytes[i % keyBytes.Length];
             }
-            
+
             return result;
         }
     }

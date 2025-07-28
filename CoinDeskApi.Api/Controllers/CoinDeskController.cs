@@ -24,12 +24,12 @@ namespace CoinDeskApi.Api.Controllers
         public async Task<ActionResult<ApiResponse<CoinDeskApiResponse>>> GetOriginalData()
         {
             _logger.LogInformation("API called: GET /api/coindesk/original");
-            
+
             try
             {
                 var result = await _coinDeskService.GetCurrentPriceAsync();
                 var response = ApiResponse<CoinDeskApiResponse>.SuccessResult(result, "Original CoinDesk data retrieved successfully");
-                
+
                 _logger.LogInformation("API response: {@Response}", response);
                 return Ok(response);
             }
@@ -48,12 +48,12 @@ namespace CoinDeskApi.Api.Controllers
         public async Task<ActionResult<ApiResponse<TransformedCoinDeskResponse>>> GetTransformedData()
         {
             _logger.LogInformation("API called: GET /api/coindesk/transformed");
-            
+
             try
             {
                 var result = await _coinDeskService.GetTransformedDataAsync();
                 var response = ApiResponse<TransformedCoinDeskResponse>.SuccessResult(result, "Transformed CoinDesk data retrieved successfully");
-                
+
                 _logger.LogInformation("API response: {@Response}", response);
                 return Ok(response);
             }

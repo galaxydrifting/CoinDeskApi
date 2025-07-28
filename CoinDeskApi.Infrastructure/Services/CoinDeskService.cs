@@ -25,19 +25,19 @@ namespace CoinDeskApi.Infrastructure.Services
             try
             {
                 _logger.LogInformation("Calling CoinDesk API: {Url}", COINDESK_API_URL);
-                
+
                 var response = await _httpClient.GetAsync(COINDESK_API_URL);
-                
+
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonContent = await response.Content.ReadAsStringAsync();
                     _logger.LogInformation("CoinDesk API Response: {Response}", jsonContent);
-                    
+
                     var coinDeskResponse = JsonSerializer.Deserialize<CoinDeskApiResponse>(jsonContent, new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     });
-                    
+
                     return coinDeskResponse ?? GetMockingData();
                 }
                 else

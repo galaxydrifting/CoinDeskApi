@@ -24,7 +24,7 @@ namespace CoinDeskApi.Api.Controllers
         public ActionResult<ApiResponse<string>> EncryptAES([FromBody] EncryptRequest request)
         {
             _logger.LogInformation("API called: POST /api/encryption/aes/encrypt");
-            
+
             try
             {
                 var encrypted = _encryptionService.EncryptAES(request.PlainText, request.Key);
@@ -46,7 +46,7 @@ namespace CoinDeskApi.Api.Controllers
         public ActionResult<ApiResponse<string>> DecryptAES([FromBody] DecryptRequest request)
         {
             _logger.LogInformation("API called: POST /api/encryption/aes/decrypt");
-            
+
             try
             {
                 var decrypted = _encryptionService.DecryptAES(request.CipherText, request.Key);
@@ -68,7 +68,7 @@ namespace CoinDeskApi.Api.Controllers
         public ActionResult<ApiResponse<RSAKeyPair>> GenerateRSAKeys()
         {
             _logger.LogInformation("API called: POST /api/encryption/rsa/generate-keys");
-            
+
             try
             {
                 var (publicKey, privateKey) = _encryptionService.GenerateRSAKeyPair();
@@ -91,7 +91,7 @@ namespace CoinDeskApi.Api.Controllers
         public ActionResult<ApiResponse<string>> EncryptRSA([FromBody] RSAEncryptRequest request)
         {
             _logger.LogInformation("API called: POST /api/encryption/rsa/encrypt");
-            
+
             try
             {
                 var encrypted = _encryptionService.EncryptRSA(request.PlainText, request.PublicKey);
@@ -113,7 +113,7 @@ namespace CoinDeskApi.Api.Controllers
         public ActionResult<ApiResponse<string>> DecryptRSA([FromBody] RSADecryptRequest request)
         {
             _logger.LogInformation("API called: POST /api/encryption/rsa/decrypt");
-            
+
             try
             {
                 var decrypted = _encryptionService.DecryptRSA(request.CipherText, request.PrivateKey);

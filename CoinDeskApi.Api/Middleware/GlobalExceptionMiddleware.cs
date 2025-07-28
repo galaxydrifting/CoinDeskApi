@@ -31,7 +31,7 @@ namespace CoinDeskApi.Api.Middleware
         private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-            
+
             var response = new ApiResponse<object>
             {
                 Success = false,

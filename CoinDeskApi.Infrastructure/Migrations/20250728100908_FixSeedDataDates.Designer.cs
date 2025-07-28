@@ -4,6 +4,7 @@ using CoinDeskApi.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoinDeskApi.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250728100908_FixSeedDataDates")]
+    partial class FixSeedDataDates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,6 +60,35 @@ namespace CoinDeskApi.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Currencies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "USD",
+                            ChineseName = "美元",
+                            CreatedAt = new DateTime(2025, 7, 28, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnglishName = "US Dollar",
+                            Symbol = "$",
+                            UpdatedAt = new DateTime(2025, 7, 28, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = "EUR",
+                            ChineseName = "歐元",
+                            CreatedAt = new DateTime(2025, 7, 28, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnglishName = "Euro",
+                            Symbol = "€",
+                            UpdatedAt = new DateTime(2025, 7, 28, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = "GBP",
+                            ChineseName = "英鎊",
+                            CreatedAt = new DateTime(2025, 7, 28, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnglishName = "British Pound Sterling",
+                            Symbol = "£",
+                            UpdatedAt = new DateTime(2025, 7, 28, 0, 0, 0, 0, DateTimeKind.Utc)
+                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -30,12 +30,8 @@ namespace CoinDeskApi.Infrastructure.Data
                 entity.HasIndex(e => e.Id).IsUnique();
             });
 
-            // Seed data
-            modelBuilder.Entity<Currency>().HasData(
-                new Currency { Id = "USD", ChineseName = "美元", EnglishName = "US Dollar", Symbol = "$", CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow },
-                new Currency { Id = "EUR", ChineseName = "歐元", EnglishName = "Euro", Symbol = "€", CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow },
-                new Currency { Id = "GBP", ChineseName = "英鎊", EnglishName = "British Pound Sterling", Symbol = "£", CreatedAt = DateTime.UtcNow, UpdatedAt = DateTime.UtcNow }
-            );
+            // Seed data removed from here - will be handled in startup
+            // Initial data will be seeded through startup code
         }
     }
 }

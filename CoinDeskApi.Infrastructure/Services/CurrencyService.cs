@@ -27,7 +27,7 @@ namespace CoinDeskApi.Infrastructure.Services
                 _logger.LogInformation("Getting all currencies");
                 var currencies = await _currencyRepository.GetAllAsync();
                 var currencyDtos = _mapper.Map<IEnumerable<CurrencyDto>>(currencies);
-                
+
                 return ApiResponse<IEnumerable<CurrencyDto>>.SuccessResult(currencyDtos, "Currencies retrieved successfully");
             }
             catch (Exception ex)
@@ -43,7 +43,7 @@ namespace CoinDeskApi.Infrastructure.Services
             {
                 _logger.LogInformation("Getting currency with ID: {CurrencyId}", id);
                 var currency = await _currencyRepository.GetByIdAsync(id);
-                
+
                 if (currency == null)
                 {
                     return ApiResponse<CurrencyDto>.ErrorResult($"Currency with ID '{id}' not found");
@@ -64,7 +64,7 @@ namespace CoinDeskApi.Infrastructure.Services
             try
             {
                 _logger.LogInformation("Creating currency with ID: {CurrencyId}", createDto.Id);
-                
+
                 if (await _currencyRepository.ExistsAsync(createDto.Id))
                 {
                     return ApiResponse<CurrencyDto>.ErrorResult($"Currency with ID '{createDto.Id}' already exists");
@@ -88,7 +88,7 @@ namespace CoinDeskApi.Infrastructure.Services
             try
             {
                 _logger.LogInformation("Updating currency with ID: {CurrencyId}", id);
-                
+
                 var existingCurrency = await _currencyRepository.GetByIdAsync(id);
                 if (existingCurrency == null)
                 {
@@ -113,7 +113,7 @@ namespace CoinDeskApi.Infrastructure.Services
             try
             {
                 _logger.LogInformation("Deleting currency with ID: {CurrencyId}", id);
-                
+
                 var deleted = await _currencyRepository.DeleteAsync(id);
                 if (!deleted)
                 {

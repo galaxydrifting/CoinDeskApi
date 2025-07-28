@@ -1,0 +1,13 @@
+CurrencyNotFound=Currency not found
+CurrencyAlreadyExists=Currency already exists
+CurrenciesRetrievedSuccessfully=Currencies retrieved successfully
+CurrencyRetrievedSuccessfully=Currency retrieved successfully
+CurrencyCreatedSuccessfully=Currency created successfully
+CurrencyUpdatedSuccessfully=Currency updated successfully
+CurrencyDeletedSuccessfully=Currency deleted successfully
+ValidationFailed=Validation failed
+FailedToRetrieveCurrencies=Failed to retrieve currencies
+FailedToRetrieveCurrency=Failed to retrieve currency
+FailedToCreateCurrency=Failed to create currency
+FailedToUpdateCurrency=Failed to update currency
+FailedToDeleteCurrency=Failed to delete currency

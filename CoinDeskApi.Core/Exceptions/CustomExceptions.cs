@@ -2,7 +2,7 @@ namespace CoinDeskApi.Core.Exceptions
 {
     public class CurrencyNotFoundException : Exception
     {
-        public CurrencyNotFoundException(string currencyId) 
+        public CurrencyNotFoundException(string currencyId)
             : base($"Currency with ID '{currencyId}' was not found.")
         {
         }
@@ -10,7 +10,7 @@ namespace CoinDeskApi.Core.Exceptions
 
     public class CurrencyAlreadyExistsException : Exception
     {
-        public CurrencyAlreadyExistsException(string currencyId) 
+        public CurrencyAlreadyExistsException(string currencyId)
             : base($"Currency with ID '{currencyId}' already exists.")
         {
         }
@@ -22,7 +22,7 @@ namespace CoinDeskApi.Core.Exceptions
         {
         }
 
-        public ExternalApiException(string message, Exception innerException) 
+        public ExternalApiException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

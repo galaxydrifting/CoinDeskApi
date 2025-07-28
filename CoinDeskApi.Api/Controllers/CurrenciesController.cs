@@ -25,12 +25,12 @@ namespace CoinDeskApi.Api.Controllers
         {
             _logger.LogInformation("API called: GET /api/currencies");
             var result = await _currencyService.GetAllCurrenciesAsync();
-            
+
             if (result.Success)
             {
                 return Ok(result);
             }
-            
+
             return BadRequest(result);
         }
 
@@ -42,12 +42,12 @@ namespace CoinDeskApi.Api.Controllers
         {
             _logger.LogInformation("API called: GET /api/currencies/{Id}", id);
             var result = await _currencyService.GetCurrencyByIdAsync(id);
-            
+
             if (result.Success)
             {
                 return Ok(result);
             }
-            
+
             return NotFound(result);
         }
 
@@ -58,7 +58,7 @@ namespace CoinDeskApi.Api.Controllers
         public async Task<ActionResult<ApiResponse<CurrencyDto>>> CreateCurrency([FromBody] CreateCurrencyDto createDto)
         {
             _logger.LogInformation("API called: POST /api/currencies with data: {@CreateDto}", createDto);
-            
+
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
@@ -66,12 +66,12 @@ namespace CoinDeskApi.Api.Controllers
             }
 
             var result = await _currencyService.CreateCurrencyAsync(createDto);
-            
+
             if (result.Success)
             {
                 return CreatedAtAction(nameof(GetCurrency), new { id = result.Data!.Id }, result);
             }
-            
+
             return BadRequest(result);
         }
 
@@ -82,7 +82,7 @@ namespace CoinDeskApi.Api.Controllers
         public async Task<ActionResult<ApiResponse<CurrencyDto>>> UpdateCurrency(string id, [FromBody] UpdateCurrencyDto updateDto)
         {
             _logger.LogInformation("API called: PUT /api/currencies/{Id} with data: {@UpdateDto}", id, updateDto);
-            
+
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
@@ -90,12 +90,12 @@ namespace CoinDeskApi.Api.Controllers
             }
 
             var result = await _currencyService.UpdateCurrencyAsync(id, updateDto);
-            
+
             if (result.Success)
             {
                 return Ok(result);
             }
-            
+
             return NotFound(result);
         }
 
@@ -107,12 +107,12 @@ namespace CoinDeskApi.Api.Controllers
         {
             _logger.LogInformation("API called: DELETE /api/currencies/{Id}", id);
             var result = await _currencyService.DeleteCurrencyAsync(id);
-            
+
             if (result.Success)
             {
                 return Ok(result);
             }
-            
+
             return NotFound(result);
         }
     }

@@ -31,7 +31,7 @@ namespace CoinDeskApi.Infrastructure.Repositories
         {
             currency.CreatedAt = DateTime.UtcNow;
             currency.UpdatedAt = DateTime.UtcNow;
-            
+
             _context.Currencies.Add(currency);
             await _context.SaveChangesAsync();
             return currency;
@@ -40,7 +40,7 @@ namespace CoinDeskApi.Infrastructure.Repositories
         public async Task<Currency> UpdateAsync(Currency currency)
         {
             currency.UpdatedAt = DateTime.UtcNow;
-            
+
             _context.Currencies.Update(currency);
             await _context.SaveChangesAsync();
             return currency;

@@ -38,7 +38,7 @@ namespace CoinDeskApi.Api.Middleware
         private async Task LogRequest(HttpContext context)
         {
             var request = context.Request;
-            
+
             var requestLog = new
             {
                 Method = request.Method,

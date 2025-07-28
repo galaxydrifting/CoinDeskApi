@@ -1,0 +1,13 @@
+CurrencyNotFound=找不到幣別
+CurrencyAlreadyExists=幣別已存在
+CurrenciesRetrievedSuccessfully=成功取得幣別列表
+CurrencyRetrievedSuccessfully=成功取得幣別資料
+CurrencyCreatedSuccessfully=成功建立幣別
+CurrencyUpdatedSuccessfully=成功更新幣別
+CurrencyDeletedSuccessfully=成功刪除幣別
+ValidationFailed=驗證失敗
+FailedToRetrieveCurrencies=取得幣別列表失敗
+FailedToRetrieveCurrency=取得幣別資料失敗
+FailedToCreateCurrency=建立幣別失敗
+FailedToUpdateCurrency=更新幣別失敗
+FailedToDeleteCurrency=刪除幣別失敗

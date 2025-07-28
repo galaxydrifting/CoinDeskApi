@@ -7,6 +7,7 @@ using CoinDeskApi.Infrastructure.Repositories;
 using CoinDeskApi.Infrastructure.Services;
 using CoinDeskApi.Infrastructure.Mapping;
 using CoinDeskApi.Api.Middleware;
+using CoinDeskApi.Core.Entities;
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -24,7 +25,11 @@ builder.Services.AddControllers();
 
 // Entity Framework
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.ConfigureWarnings(warnings =>
+        warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
+});
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -95,11 +100,37 @@ app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
 
-// Auto migrate database on startup
-using (var scope = app.Services.CreateScope())
+// Auto migrate database on startup and seed initial data
+try
 {
+    using var scope = app.Services.CreateScope();
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    context.Database.Migrate();
+
+    Log.Information("Ensuring database is created...");
+    context.Database.EnsureCreated();
+
+    Log.Information("Seeding initial data if needed...");
+    if (!context.Currencies.Any())
+    {
+        var currencies = new[]
+        {
+            new Currency { Id = "USD", ChineseName = "美元", EnglishName = "US Dollar", Symbol = "$" },
+            new Currency { Id = "EUR", ChineseName = "歐元", EnglishName = "Euro", Symbol = "€" },
+            new Currency { Id = "GBP", ChineseName = "英鎊", EnglishName = "British Pound Sterling", Symbol = "£" }
+        };
+
+        context.Currencies.AddRange(currencies);
+        context.SaveChanges();
+        Log.Information("Initial currency data seeded successfully");
+    }
+    else
+    {
+        Log.Information("Currency data already exists, skipping seed");
+    }
+}
+catch (Exception ex)
+{
+    Log.Error(ex, "Error during database initialization");
 }
 
 try
