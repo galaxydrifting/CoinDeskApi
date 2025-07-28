@@ -1,0 +1,44 @@
+{
+    // C# settings
+    "dotnet.defaultSolution": "CoinDeskApi.sln",
+    "omnisharp.enableEditorConfigSupport": true,
+    "omnisharp.enableImportCompletion": true,
+    "omnisharp.enableRoslynAnalyzers": true,
+    // File exclusions for better performance
+    "files.exclude": {
+        "**/bin": true,
+        "**/obj": true,
+        "**/.vs": true
+    },
+    // Auto save
+    "files.autoSave": "onFocusChange",
+    // Format on save
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    // C# specific formatting
+    "[csharp]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp",
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
+    },
+    // JSON formatting
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.tabSize": 2
+    },
+    // XML formatting
+    "[xml]": {
+        "editor.tabSize": 2
+    },
+    // Terminal settings
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    // Explorer settings
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.csproj": "*.csproj.user",
+        "appsettings.json": "appsettings.*.json"
+    }
+}

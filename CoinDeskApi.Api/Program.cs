@@ -95,7 +95,12 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+// Only use HTTPS redirection in production or when HTTPS is available
+if (!app.Environment.IsDevelopment() ||
+    app.Configuration.GetValue<string>("ASPNETCORE_URLS")?.Contains("https") == true)
+{
+    app.UseHttpsRedirection();
+}
 app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
