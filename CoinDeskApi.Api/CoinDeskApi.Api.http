@@ -1,0 +1,6 @@
+@CoinDeskApi.Api_HostAddress = http://localhost:5253
+
+GET {{CoinDeskApi.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

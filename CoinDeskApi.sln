@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinDeskApi.Api", "CoinDeskApi.Api\CoinDeskApi.Api.csproj", "{67953083-FAC9-4DFF-9EF1-744279ACF265}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinDeskApi.Core", "CoinDeskApi.Core\CoinDeskApi.Core.csproj", "{1BA3821E-EA17-4560-8E30-7E3635B17F34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinDeskApi.Infrastructure", "CoinDeskApi.Infrastructure\CoinDeskApi.Infrastructure.csproj", "{56C4074C-911A-4505-BD25-84D98E68FF30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinDeskApi.Tests", "CoinDeskApi.Tests\CoinDeskApi.Tests.csproj", "{5CF686CB-8389-42B0-9251-C83466EE3DE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67953083-FAC9-4DFF-9EF1-744279ACF265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67953083-FAC9-4DFF-9EF1-744279ACF265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67953083-FAC9-4DFF-9EF1-744279ACF265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67953083-FAC9-4DFF-9EF1-744279ACF265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BA3821E-EA17-4560-8E30-7E3635B17F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA3821E-EA17-4560-8E30-7E3635B17F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA3821E-EA17-4560-8E30-7E3635B17F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA3821E-EA17-4560-8E30-7E3635B17F34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C4074C-911A-4505-BD25-84D98E68FF30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C4074C-911A-4505-BD25-84D98E68FF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C4074C-911A-4505-BD25-84D98E68FF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C4074C-911A-4505-BD25-84D98E68FF30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF686CB-8389-42B0-9251-C83466EE3DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF686CB-8389-42B0-9251-C83466EE3DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF686CB-8389-42B0-9251-C83466EE3DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF686CB-8389-42B0-9251-C83466EE3DE1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
