@@ -2,7 +2,6 @@ using AutoMapper;
 using CoinDeskApi.Core.DTOs;
 using CoinDeskApi.Core.Entities;
 using CoinDeskApi.Core.Interfaces;
-using CoinDeskApi.Core.Exceptions;
 using Microsoft.Extensions.Logging;
 
 namespace CoinDeskApi.Infrastructure.Services

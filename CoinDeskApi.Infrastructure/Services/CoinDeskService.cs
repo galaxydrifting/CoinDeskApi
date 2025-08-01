@@ -1,7 +1,6 @@
 using System.Text.Json;
 using CoinDeskApi.Core.DTOs;
 using CoinDeskApi.Core.Interfaces;
-using CoinDeskApi.Core.Exceptions;
 using Microsoft.Extensions.Logging;
 
 namespace CoinDeskApi.Infrastructure.Services

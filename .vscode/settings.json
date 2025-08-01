@@ -2,8 +2,6 @@
     // C# settings
     "dotnet.defaultSolution": "CoinDeskApi.sln",
     "omnisharp.enableEditorConfigSupport": true,
-    "omnisharp.enableImportCompletion": true,
-    "omnisharp.enableRoslynAnalyzers": true,
     // File exclusions for better performance
     "files.exclude": {
         "**/bin": true,
@@ -38,7 +36,7 @@
     // Explorer settings
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-        "*.csproj": "*.csproj.user",
         "appsettings.json": "appsettings.*.json"
-    }
+    },
+    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true
 }
