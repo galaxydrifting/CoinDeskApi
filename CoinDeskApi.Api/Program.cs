@@ -68,7 +68,7 @@ builder.Services.AddSwaggerGen(c =>
     }
 });
 
-// CORS
+// CORS, demo 用先全開，正常僅允許前端或者 reverse proxy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
