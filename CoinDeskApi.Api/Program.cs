@@ -34,8 +34,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// HttpClient for CoinDesk API
-builder.Services.AddHttpClient<ICoinDeskService, CoinDeskService>();
+// 共用 HttpClient
+builder.Services.AddHttpClient();
 
 // Repository and Service dependencies
 builder.Services.AddScoped<ICurrencyRepository, CurrencyRepository>();
