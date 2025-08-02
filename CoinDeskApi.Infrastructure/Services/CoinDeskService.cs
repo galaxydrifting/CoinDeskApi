@@ -60,7 +60,7 @@ namespace CoinDeskApi.Infrastructure.Services
 
             var transformedResponse = new TransformedCoinDeskResponse
             {
-                UpdateTime = ConvertToTaiwanTime(originalData.Time.UpdatedISO),
+                UpdateTime = FormatIsoDateTimeString(originalData.Time.UpdatedISO),
                 Currencies = originalData.Bpi
                     .Select(bpi => new CurrencyInfo
                     {
@@ -117,15 +117,14 @@ namespace CoinDeskApi.Infrastructure.Services
             };
         }
 
-        private static string ConvertToTaiwanTime(string isoDateTime)
+        private static string FormatIsoDateTimeString(string isoDateTime)
         {
             if (DateTimeOffset.TryParse(isoDateTime, out var dateTimeOffset))
             {
-                // 直接轉成台灣時區 (UTC+8)
-                var taiwanTime = dateTimeOffset.ToOffset(TimeSpan.FromHours(8));
-                return taiwanTime.ToString("yyyy/MM/dd HH:mm:ss");
+                // 只格式化，不轉時區
+                return dateTimeOffset.UtcDateTime.ToString("yyyy/MM/dd HH:mm:ss");
             }
-            return DateTimeOffset.Now.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy/MM/dd HH:mm:ss");
+            return DateTimeOffset.UtcNow.ToString("yyyy/MM/dd HH:mm:ss");
         }
     }
 }
