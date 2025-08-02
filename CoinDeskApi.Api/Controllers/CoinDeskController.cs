@@ -23,22 +23,9 @@ namespace CoinDeskApi.Api.Controllers
         [HttpGet("original")]
         public async Task<ActionResult<ApiResponse<CoinDeskApiResponse>>> GetOriginalData()
         {
-            _logger.LogInformation("API called: GET /api/coindesk/original");
-
-            try
-            {
-                var result = await _coinDeskService.GetCurrentPriceAsync();
-                var response = ApiResponse<CoinDeskApiResponse>.SuccessResult(result, "Original CoinDesk data retrieved successfully");
-
-                _logger.LogInformation("API response: {@Response}", response);
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting original CoinDesk data");
-                var errorResponse = ApiResponse<CoinDeskApiResponse>.ErrorResult("Failed to retrieve CoinDesk data");
-                return StatusCode(500, errorResponse);
-            }
+            var result = await _coinDeskService.GetCurrentPriceAsync();
+            var response = ApiResponse<CoinDeskApiResponse>.SuccessResult(result, "Original CoinDesk data retrieved successfully");
+            return Ok(response);
         }
 
         /// <summary>
@@ -47,22 +34,9 @@ namespace CoinDeskApi.Api.Controllers
         [HttpGet("transformed")]
         public async Task<ActionResult<ApiResponse<TransformedCoinDeskResponse>>> GetTransformedData()
         {
-            _logger.LogInformation("API called: GET /api/coindesk/transformed");
-
-            try
-            {
-                var result = await _coinDeskService.GetTransformedDataAsync();
-                var response = ApiResponse<TransformedCoinDeskResponse>.SuccessResult(result, "Transformed CoinDesk data retrieved successfully");
-
-                _logger.LogInformation("API response: {@Response}", response);
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting transformed CoinDesk data");
-                var errorResponse = ApiResponse<TransformedCoinDeskResponse>.ErrorResult("Failed to retrieve transformed CoinDesk data");
-                return StatusCode(500, errorResponse);
-            }
+            var result = await _coinDeskService.GetTransformedDataAsync();
+            var response = ApiResponse<TransformedCoinDeskResponse>.SuccessResult(result, "Transformed CoinDesk data retrieved successfully");
+            return Ok(response);
         }
     }
 }

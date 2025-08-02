@@ -28,7 +28,6 @@ namespace CoinDeskApi.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResponse<IEnumerable<CurrencyDto>>>> GetAllCurrencies()
         {
-            _logger.LogInformation("API called: GET /api/currencies");
             var result = await _currencyService.GetAllCurrenciesAsync();
 
             if (result.Success)
@@ -45,7 +44,6 @@ namespace CoinDeskApi.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse<CurrencyDto>>> GetCurrency(string id)
         {
-            _logger.LogInformation("API called: GET /api/currencies/{Id}", id);
             var result = await _currencyService.GetCurrencyByIdAsync(id);
 
             if (result.Success)
@@ -62,8 +60,6 @@ namespace CoinDeskApi.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<ApiResponse<CurrencyDto>>> CreateCurrency([FromBody] CreateCurrencyDto createDto)
         {
-            _logger.LogInformation("API called: POST /api/currencies with data: {@CreateDto}", createDto);
-
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
@@ -87,8 +83,6 @@ namespace CoinDeskApi.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<CurrencyDto>>> UpdateCurrency(string id, [FromBody] UpdateCurrencyDto updateDto)
         {
-            _logger.LogInformation("API called: PUT /api/currencies/{Id} with data: {@UpdateDto}", id, updateDto);
-
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
@@ -112,7 +106,6 @@ namespace CoinDeskApi.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<ApiResponse<bool>>> DeleteCurrency(string id)
         {
-            _logger.LogInformation("API called: DELETE /api/currencies/{Id}", id);
             var result = await _currencyService.DeleteCurrencyAsync(id);
 
             if (result.Success)

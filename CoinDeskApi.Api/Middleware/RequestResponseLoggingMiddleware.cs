@@ -24,7 +24,18 @@ namespace CoinDeskApi.Api.Middleware
             context.Response.Body = responseBodyStream;
 
             var startTime = DateTime.UtcNow;
-            await _next(context);
+
+            try
+            {
+                await _next(context);
+            }
+            catch (Exception)
+            {
+                // 如果發生例外，恢復原始 response stream 讓 GlobalExceptionMiddleware 可以處理
+                context.Response.Body = originalResponseBodyStream;
+                throw; // 重新拋出例外讓 GlobalExceptionMiddleware 處理
+            }
+
             var endTime = DateTime.UtcNow;
 
             // Log response

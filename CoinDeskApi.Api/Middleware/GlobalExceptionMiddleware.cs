@@ -30,6 +30,13 @@ namespace CoinDeskApi.Api.Middleware
 
         private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            // 確保 response 還沒有開始寫入
+            if (context.Response.HasStarted)
+            {
+                // Response 已經開始，無法修改 headers 或 status code
+                return;
+            }
+
             context.Response.ContentType = "application/json";
 
             var response = new ApiResponse<object>

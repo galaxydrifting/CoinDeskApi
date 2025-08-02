@@ -23,20 +23,9 @@ namespace CoinDeskApi.Api.Controllers
         [HttpPost("aes/encrypt")]
         public ActionResult<ApiResponse<string>> EncryptAES([FromBody] EncryptRequest request)
         {
-            _logger.LogInformation("API called: POST /api/encryption/aes/encrypt");
-
-            try
-            {
-                var encrypted = _encryptionService.EncryptAES(request.PlainText, request.Key);
-                var response = ApiResponse<string>.SuccessResult(encrypted, "Text encrypted successfully");
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error during AES encryption");
-                var errorResponse = ApiResponse<string>.ErrorResult("Encryption failed");
-                return BadRequest(errorResponse);
-            }
+            var encrypted = _encryptionService.EncryptAES(request.PlainText, request.Key);
+            var response = ApiResponse<string>.SuccessResult(encrypted, "Text encrypted successfully");
+            return Ok(response);
         }
 
         /// <summary>
@@ -45,20 +34,9 @@ namespace CoinDeskApi.Api.Controllers
         [HttpPost("aes/decrypt")]
         public ActionResult<ApiResponse<string>> DecryptAES([FromBody] DecryptRequest request)
         {
-            _logger.LogInformation("API called: POST /api/encryption/aes/decrypt");
-
-            try
-            {
-                var decrypted = _encryptionService.DecryptAES(request.CipherText, request.Key);
-                var response = ApiResponse<string>.SuccessResult(decrypted, "Text decrypted successfully");
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error during AES decryption");
-                var errorResponse = ApiResponse<string>.ErrorResult("Decryption failed");
-                return BadRequest(errorResponse);
-            }
+            var decrypted = _encryptionService.DecryptAES(request.CipherText, request.Key);
+            var response = ApiResponse<string>.SuccessResult(decrypted, "Text decrypted successfully");
+            return Ok(response);
         }
 
         /// <summary>
@@ -67,21 +45,10 @@ namespace CoinDeskApi.Api.Controllers
         [HttpPost("rsa/generate-keys")]
         public ActionResult<ApiResponse<RSAKeyPair>> GenerateRSAKeys()
         {
-            _logger.LogInformation("API called: POST /api/encryption/rsa/generate-keys");
-
-            try
-            {
-                var (publicKey, privateKey) = _encryptionService.GenerateRSAKeyPair();
-                var keyPair = new RSAKeyPair { PublicKey = publicKey, PrivateKey = privateKey };
-                var response = ApiResponse<RSAKeyPair>.SuccessResult(keyPair, "RSA key pair generated successfully");
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error generating RSA key pair");
-                var errorResponse = ApiResponse<RSAKeyPair>.ErrorResult("Key generation failed");
-                return BadRequest(errorResponse);
-            }
+            var (publicKey, privateKey) = _encryptionService.GenerateRSAKeyPair();
+            var keyPair = new RSAKeyPair { PublicKey = publicKey, PrivateKey = privateKey };
+            var response = ApiResponse<RSAKeyPair>.SuccessResult(keyPair, "RSA key pair generated successfully");
+            return Ok(response);
         }
 
         /// <summary>
@@ -90,20 +57,9 @@ namespace CoinDeskApi.Api.Controllers
         [HttpPost("rsa/encrypt")]
         public ActionResult<ApiResponse<string>> EncryptRSA([FromBody] RSAEncryptRequest request)
         {
-            _logger.LogInformation("API called: POST /api/encryption/rsa/encrypt");
-
-            try
-            {
-                var encrypted = _encryptionService.EncryptRSA(request.PlainText, request.PublicKey);
-                var response = ApiResponse<string>.SuccessResult(encrypted, "Text encrypted successfully");
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error during RSA encryption");
-                var errorResponse = ApiResponse<string>.ErrorResult("Encryption failed");
-                return BadRequest(errorResponse);
-            }
+            var encrypted = _encryptionService.EncryptRSA(request.PlainText, request.PublicKey);
+            var response = ApiResponse<string>.SuccessResult(encrypted, "Text encrypted successfully");
+            return Ok(response);
         }
 
         /// <summary>
@@ -112,20 +68,9 @@ namespace CoinDeskApi.Api.Controllers
         [HttpPost("rsa/decrypt")]
         public ActionResult<ApiResponse<string>> DecryptRSA([FromBody] RSADecryptRequest request)
         {
-            _logger.LogInformation("API called: POST /api/encryption/rsa/decrypt");
-
-            try
-            {
-                var decrypted = _encryptionService.DecryptRSA(request.CipherText, request.PrivateKey);
-                var response = ApiResponse<string>.SuccessResult(decrypted, "Text decrypted successfully");
-                return Ok(response);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error during RSA decryption");
-                var errorResponse = ApiResponse<string>.ErrorResult("Decryption failed");
-                return BadRequest(errorResponse);
-            }
+            var decrypted = _encryptionService.DecryptRSA(request.CipherText, request.PrivateKey);
+            var response = ApiResponse<string>.SuccessResult(decrypted, "Text decrypted successfully");
+            return Ok(response);
         }
     }
 
