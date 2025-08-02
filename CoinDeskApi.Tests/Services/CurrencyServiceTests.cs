@@ -1,4 +1,3 @@
-using Xunit;
 using Moq;
 using Microsoft.Extensions.Logging;
 using CoinDeskApi.Core.Interfaces;

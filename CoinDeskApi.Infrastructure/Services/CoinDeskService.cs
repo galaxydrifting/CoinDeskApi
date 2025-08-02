@@ -119,13 +119,13 @@ namespace CoinDeskApi.Infrastructure.Services
 
         private static string ConvertToTaiwanTime(string isoDateTime)
         {
-            if (DateTime.TryParse(isoDateTime, out var dateTime))
+            if (DateTimeOffset.TryParse(isoDateTime, out var dateTimeOffset))
             {
-                // Convert to Taiwan time (UTC+8)
-                var taiwanTime = dateTime.AddHours(8);
+                // 直接轉成台灣時區 (UTC+8)
+                var taiwanTime = dateTimeOffset.ToOffset(TimeSpan.FromHours(8));
                 return taiwanTime.ToString("yyyy/MM/dd HH:mm:ss");
             }
-            return DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            return DateTimeOffset.Now.ToOffset(TimeSpan.FromHours(8)).ToString("yyyy/MM/dd HH:mm:ss");
         }
     }
 }

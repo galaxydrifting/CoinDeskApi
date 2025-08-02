@@ -1,4 +1,3 @@
-using Xunit;
 using CoinDeskApi.Infrastructure.Services;
 
 namespace CoinDeskApi.Tests.Services
