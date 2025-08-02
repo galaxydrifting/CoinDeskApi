@@ -16,7 +16,7 @@ services:
       - coindesk-network
 
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2022-CU20-ubuntu-22.04
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=YourPassword123!
