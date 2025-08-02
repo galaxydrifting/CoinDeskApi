@@ -30,6 +30,7 @@
 - ✅ **Design Pattern**: Repository Pattern, Dependency Injection
 - ✅ **Docker 支援**: 可運行在 Docker 容器中
 - ✅ **加解密技術**: AES 對稱加密 + RSA 非對稱加密
+- ✅ **多語系支援**: 支援繁體中文與英文切換
 
 ## API 端點
 
@@ -50,6 +51,31 @@
 - `POST /api/encryption/rsa/generate-keys` - 產生 RSA 金鑰對
 - `POST /api/encryption/rsa/encrypt` - RSA 加密
 - `POST /api/encryption/rsa/decrypt` - RSA 解密
+
+## 多語系支援
+
+### 支援的語言
+- **英文 (en-US)**: 預設語言
+- **繁體中文 (zh-TW)**: 完整中文化介面
+
+### 語言切換方式
+支援三種語言切換方式，優先順序如下：
+1. **Query String**: `?culture=zh-TW`
+2. **Cookie**: `.AspNetCore.Culture=c=zh-TW|uic=zh-TW`
+3. **Accept-Language Header**: `Accept-Language: zh-TW`
+
+### 使用範例
+```bash
+# 使用 Query String 切換語言
+curl "https://localhost:7139/api/currencies?culture=zh-TW"
+
+# 使用 Header 切換語言
+curl -H "Accept-Language: zh-TW" "https://localhost:7139/api/currencies"
+```
+
+### 訊息範例
+- **英文**: `"message": "Currencies retrieved successfully"`
+- **中文**: `"message": "成功取得幣別列表"`
 
 ## 資料庫設計
 
@@ -80,7 +106,7 @@ INSERT INTO Currency (Id, ChineseName, EnglishName, Symbol) VALUES
 
 ### 本地運行
 
-1. **克隆專案**
+1. **下載專案**
 ```bash
 git clone https://github.com/galaxydrifting/CoinDeskApi.git
 cd coindesk
@@ -102,7 +128,7 @@ dotnet run --project CoinDeskApi.Api
 ```
 
 5. **開啟 Swagger UI**
-瀏覽器開啟: `https://localhost:7139` 或 `http://localhost:5139`
+瀏覽器開啟: `https://localhost:7139` 或 `http://localhost:5000`
 
 ### Docker 運行
 
@@ -121,16 +147,20 @@ CoinDeskApi/
 ├── CoinDeskApi.Api/                 # Web API 主專案
 │   ├── Controllers/                 # API 控制器
 │   ├── Middleware/                  # 中介軟體
-│   └── Resources/                   # 多語系資源 (規劃中)
+│   └── Resources/                   # 多語系資源檔案
+│       ├── Messages.resx            # 英文訊息 (預設)
+│       └── Messages.zh-TW.resx     # 繁體中文訊息
 ├── CoinDeskApi.Core/                # 核心業務邏輯
 │   ├── DTOs/                        # 資料傳輸物件
 │   ├── Entities/                    # 實體類別
 │   ├── Interfaces/                  # 介面定義
+│   │   └── ILocalizationService.cs # 多語系服務介面
 │   └── Exceptions/                  # 自定義例外
 ├── CoinDeskApi.Infrastructure/      # 基礎設施層
 │   ├── Data/                        # 資料庫上下文
 │   ├── Repositories/                # 資料存取
 │   ├── Services/                    # 業務服務
+│   │   └── LocalizationService.cs  # 多語系服務實作
 │   └── Mapping/                     # AutoMapper 配置
 ├── CoinDeskApi.Tests/               # 單元測試
 └── Docker 相關檔案
@@ -149,6 +179,7 @@ dotnet test
 - Repository 測試
 - 加解密功能測試
 - 外部 API 呼叫測試
+- 多語系功能測試
 
 ## 設計模式
 
@@ -182,3 +213,11 @@ dotnet test
 2. 首次運行會自動建立資料庫和初始資料
 3. CoinDesk API 呼叫失敗時會自動使用 Mocking Data
 4. 所有 API 呼叫都會被完整記錄在日誌中
+5. 多語系支援透過 Query String、Cookie 或 Header 切換語言
+
+## 多語系新增語言說明
+
+如需新增其他語言支援：
+1. 新增對應的 `.resx` 檔案 (例如：`Messages.ja-JP.resx`)
+2. 在 `Program.cs` 中添加新的 `CultureInfo`
+3. 重新啟動應用程式
