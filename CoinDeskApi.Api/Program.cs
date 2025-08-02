@@ -110,6 +110,14 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+// 全域 GlobalExceptionMiddleware 處理所有未捕獲例外
+// 若有 controller/action 需細緻錯誤格式或特殊處理，可額外註冊 Exception Filter
+// 例如：
+// builder.Services.AddControllers(options =>
+// {
+//     options.Filters.Add<MyCustomExceptionFilter>(); // 全域
+// });
+// 或在 controller/action 上加 [TypeFilter(typeof(MyCustomExceptionFilter))] // 局部
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseMiddleware<RequestResponseLoggingMiddleware>();
 

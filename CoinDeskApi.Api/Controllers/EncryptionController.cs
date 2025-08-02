@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using CoinDeskApi.Core.Interfaces;
 using CoinDeskApi.Core.DTOs;
+using CoinDeskApi.Api.Filters;
 
 namespace CoinDeskApi.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [TypeFilter(typeof(EncryptionExceptionFilter))]
     public class EncryptionController : ControllerBase
     {
         private readonly IEncryptionService _encryptionService;
