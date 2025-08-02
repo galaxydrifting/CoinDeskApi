@@ -67,10 +67,10 @@
 ### 使用範例
 ```bash
 # 使用 Query String 切換語言
-curl "https://localhost:7139/api/currencies?culture=zh-TW"
+curl "http://localhost:5000/api/currencies?culture=zh-TW"
 
 # 使用 Header 切換語言
-curl -H "Accept-Language: zh-TW" "https://localhost:7139/api/currencies"
+curl -H "Accept-Language: zh-TW" "http://localhost:5000/api/currencies"
 ```
 
 ### 訊息範例
@@ -128,7 +128,7 @@ dotnet run --project CoinDeskApi.Api
 ```
 
 5. **開啟 Swagger UI**
-瀏覽器開啟: `https://localhost:7139` 或 `http://localhost:5000`
+瀏覽器開啟: `http://localhost:5000`
 
 ### Docker 運行
 
