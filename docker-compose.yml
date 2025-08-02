@@ -10,6 +10,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CoinDeskApiDb;User Id=sa;Password=YourPassword123!;TrustServerCertificate=true
+      - LANG=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
     depends_on:
       - sqlserver
     networks:

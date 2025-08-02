@@ -1,6 +1,16 @@
 # See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+
+# 安裝中文語系支援
+USER root
+RUN apt-get update && apt-get install -y locales \
+    && sed -i '/zh_TW.UTF-8/s/^# //g' /etc/locale.gen \
+    && sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
+    && locale-gen \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 USER app
 EXPOSE 8080
 EXPOSE 8081
