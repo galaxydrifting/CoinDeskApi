@@ -27,7 +27,7 @@
 - ✅ **API 請求/回應日誌記錄**: 完整記錄所有 API 呼叫和外部 API 請求
 - ✅ **Error Handling**: 全域例外處理中介軟體
 - ✅ **Swagger UI**: 完整的 API 文檔介面
-- ✅ **Design Pattern**: Repository Pattern, Unit of Work, Dependency Injection
+- ✅ **Design Pattern**: Repository Pattern, Dependency Injection
 - ✅ **Docker 支援**: 可運行在 Docker 容器中
 - ✅ **加解密技術**: AES 對稱加密 + RSA 非對稱加密
 
@@ -82,7 +82,7 @@ INSERT INTO Currency (Id, ChineseName, EnglishName, Symbol) VALUES
 
 1. **克隆專案**
 ```bash
-git clone [YOUR_REPO_URL]
+git clone https://github.com/galaxydrifting/CoinDeskApi.git
 cd coindesk
 ```
 
@@ -155,14 +155,12 @@ dotnet test
 1. **Repository Pattern**: 抽象化資料存取邏輯
 2. **Dependency Injection**: 依賴注入降低耦合
 3. **Strategy Pattern**: 加解密策略模式
-4. **Middleware Pattern**: 請求/回應處理管道
 
 ## 日誌記錄
 
 使用 Serilog 進行結構化日誌記錄:
 - Console 輸出
 - 檔案記錄 (每日輪替)
-- 結構化 JSON 格式
 - 請求/回應完整記錄
 
 ## 錯誤處理
@@ -184,7 +182,3 @@ dotnet test
 2. 首次運行會自動建立資料庫和初始資料
 3. CoinDesk API 呼叫失敗時會自動使用 Mocking Data
 4. 所有 API 呼叫都會被完整記錄在日誌中
-
-## 授權
-
-MIT License
