@@ -137,7 +137,7 @@ dotnet run --project CoinDeskApi.Api
 docker-compose up -d
 ```
 
-2. **開啟 API**
+2. **開啟 Swagger UI**
 瀏覽器開啟: `http://localhost:5000`
 
 ## 專案結構
@@ -174,18 +174,18 @@ dotnet test
 ```
 
 ### 測試覆蓋
-- Controller 測試
-- Service 層測試
-- Repository 測試
-- 加解密功能測試
-- 外部 API 呼叫測試
-- 多語系功能測試
+- ✅ **Controller 測試**: 完整覆蓋所有 API 端點
+- ✅ **Service 層測試**: 覆蓋核心業務邏輯
+- ✅ **加解密功能測試**: AES 和 RSA 加解密完整測試
+- ✅ **外部 API 呼叫測試**: CoinDesk API 呼叫和錯誤處理測試
+- ✅ **多語系功能測試**: 語言切換和訊息本地化測試
+
+**總計: 54 個單元測試 (包含 [Fact] 和 [Theory] 測試)**
 
 ## 設計模式
 
 1. **Repository Pattern**: 抽象化資料存取邏輯
 2. **Dependency Injection**: 依賴注入降低耦合
-3. **Strategy Pattern**: 加解密策略模式
 
 ## 日誌記錄
 

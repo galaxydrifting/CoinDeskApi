@@ -13,6 +13,7 @@ namespace CoinDeskApi.Tests.Services
         private readonly Mock<ICurrencyRepository> _mockRepository;
         private readonly Mock<IMapper> _mockMapper;
         private readonly Mock<ILogger<CurrencyService>> _mockLogger;
+        private readonly Mock<ILocalizationService> _mockLocalizationService;
         private readonly CurrencyService _service;
 
         public CurrencyServiceTests()
@@ -20,7 +21,19 @@ namespace CoinDeskApi.Tests.Services
             _mockRepository = new Mock<ICurrencyRepository>();
             _mockMapper = new Mock<IMapper>();
             _mockLogger = new Mock<ILogger<CurrencyService>>();
-            _service = new CurrencyService(_mockRepository.Object, _mockMapper.Object, _mockLogger.Object);
+            _mockLocalizationService = new Mock<ILocalizationService>();
+
+            // 設定本地化服務的特定回傳值
+            _mockLocalizationService.Setup(x => x.GetString("CurrencyNotFound")).Returns("Currency not found");
+            _mockLocalizationService.Setup(x => x.GetString("CurrencyAlreadyExists")).Returns("Currency already exists");
+            _mockLocalizationService.Setup(x => x.GetString("CurrenciesRetrievedSuccessfully")).Returns("Currencies retrieved successfully");
+            _mockLocalizationService.Setup(x => x.GetString("CurrencyRetrievedSuccessfully")).Returns("Currency retrieved successfully");
+            _mockLocalizationService.Setup(x => x.GetString("CurrencyCreatedSuccessfully")).Returns("Currency created successfully");
+            _mockLocalizationService.Setup(x => x.GetString("FailedToRetrieveCurrencies")).Returns("Failed to retrieve currencies");
+            _mockLocalizationService.Setup(x => x.GetString("FailedToRetrieveCurrency")).Returns("Failed to retrieve currency");
+            _mockLocalizationService.Setup(x => x.GetString("FailedToCreateCurrency")).Returns("Failed to create currency");
+
+            _service = new CurrencyService(_mockRepository.Object, _mockMapper.Object, _mockLogger.Object, _mockLocalizationService.Object);
         }
 
         [Fact]
@@ -46,6 +59,7 @@ namespace CoinDeskApi.Tests.Services
 
             // Assert
             Assert.True(result.Success);
+            Assert.NotNull(result.Data);
             Assert.Equal(2, result.Data.Count());
         }
 
@@ -64,6 +78,7 @@ namespace CoinDeskApi.Tests.Services
 
             // Assert
             Assert.True(result.Success);
+            Assert.NotNull(result.Data);
             Assert.Equal("USD", result.Data.Id);
         }
 
@@ -71,7 +86,7 @@ namespace CoinDeskApi.Tests.Services
         public async Task GetCurrencyByIdAsync_WithInvalidId_ShouldReturnErrorResponse()
         {
             // Arrange
-            _mockRepository.Setup(r => r.GetByIdAsync("INVALID")).ReturnsAsync((Currency)null);
+            _mockRepository.Setup(r => r.GetByIdAsync("INVALID")).ReturnsAsync((Currency?)null);
 
             // Act
             var result = await _service.GetCurrencyByIdAsync("INVALID");
@@ -99,6 +114,7 @@ namespace CoinDeskApi.Tests.Services
 
             // Assert
             Assert.True(result.Success);
+            Assert.NotNull(result.Data);
             Assert.Equal("JPY", result.Data.Id);
         }
 

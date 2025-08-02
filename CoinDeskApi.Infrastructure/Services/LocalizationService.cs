@@ -14,12 +14,14 @@ namespace CoinDeskApi.Infrastructure.Services
 
         public string GetString(string key)
         {
-            return _localizer[key];
+            var localized = _localizer[key];
+            return localized.ResourceNotFound ? key : localized.Value;
         }
 
         public string GetString(string key, params object[] arguments)
         {
-            return _localizer[key, arguments];
+            var localized = _localizer[key, arguments];
+            return localized.ResourceNotFound ? key : localized.Value;
         }
     }
 }

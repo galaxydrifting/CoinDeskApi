@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CoinDeskApi.Core\CoinDeskApi.Core.csproj" />
     <ProjectReference Include="..\CoinDeskApi.Infrastructure\CoinDeskApi.Infrastructure.csproj" />
+    <ProjectReference Include="..\CoinDeskApi.Api\CoinDeskApi.Api.csproj" />
   </ItemGroup>
 
 </Project>
