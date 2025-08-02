@@ -20,17 +20,14 @@
 
 ## 🧪 測試結果
 
-### 成功取得幣別清單
-**英文**: `"message": "Currencies retrieved successfully"`
+✅ **所有語言切換方式都已驗證正常**
+- Query String: `?culture=zh-TW`
+- Accept-Language Header: `Accept-Language: zh-TW`
+- Cookie: `.AspNetCore.Culture=c=zh-TW|uic=zh-TW`
+
+### 訊息範例
+**英文**: `"message": "Currencies retrieved successfully"`  
 **中文**: `"message": "成功取得幣別列表"`
-
-### 找不到幣別錯誤
-**英文**: `"message": "Currency not found"`
-**中文**: `"message": "找不到幣別"`
-
-### 幣別已存在錯誤
-**英文**: `"message": "Currency already exists"`
-**中文**: `"message": "幣別已存在"`
 
 ## 📋 支援的訊息鍵
 
@@ -53,18 +50,12 @@
 
 ## 🎯 使用方式
 
-### 1. HTTP Header 方式
-```bash
-curl -H "Accept-Language: zh-TW" http://localhost:5253/api/currencies
-```
+多語系支援三種語言切換方式，優先順序如下：
+1. **Query String**: `?culture=zh-TW`
+2. **Cookie**: `.AspNetCore.Culture=c=zh-TW|uic=zh-TW`
+3. **Accept-Language Header**: `Accept-Language: zh-TW`
 
-### 2. Query String 方式
-```bash
-curl "http://localhost:5253/api/currencies?culture=zh-TW"
-```
-
-### 3. Cookie 方式
-設定 `.AspNetCore.Culture` cookie
+> 詳細測試方法請參考 [`LOCALIZATION_TEST.md`](LOCALIZATION_TEST.md)
 
 ## 🔧 技術實作
 
@@ -95,6 +86,13 @@ builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 ```csharp
 app.UseRequestLocalization();
 ```
+
+## 🔍 關鍵發現
+
+### Cookie 格式
+Cookie 的正確格式為：`.AspNetCore.Culture=c=zh-TW|uic=zh-TW`
+- `c=` 代表 Culture (用於數字、日期格式)
+- `uic=` 代表 UI Culture (用於多語系文字)
 
 ## 🚀 新增更多的語言
 
