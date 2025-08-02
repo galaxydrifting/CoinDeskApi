@@ -10,11 +10,16 @@ namespace CoinDeskApi.Api.Controllers
     {
         private readonly ICurrencyService _currencyService;
         private readonly ILogger<CurrenciesController> _logger;
+        private readonly ILocalizationService _localizationService;
 
-        public CurrenciesController(ICurrencyService currencyService, ILogger<CurrenciesController> logger)
+        public CurrenciesController(
+            ICurrencyService currencyService,
+            ILogger<CurrenciesController> logger,
+            ILocalizationService localizationService)
         {
             _currencyService = currencyService;
             _logger = logger;
+            _localizationService = localizationService;
         }
 
         /// <summary>
@@ -62,7 +67,8 @@ namespace CoinDeskApi.Api.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-                return BadRequest(ApiResponse<CurrencyDto>.ErrorResult("Validation failed", errors));
+                return BadRequest(ApiResponse<CurrencyDto>.ErrorResult(
+                    _localizationService.GetString("ValidationFailed"), errors));
             }
 
             var result = await _currencyService.CreateCurrencyAsync(createDto);
@@ -86,7 +92,8 @@ namespace CoinDeskApi.Api.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-                return BadRequest(ApiResponse<CurrencyDto>.ErrorResult("Validation failed", errors));
+                return BadRequest(ApiResponse<CurrencyDto>.ErrorResult(
+                    _localizationService.GetString("ValidationFailed"), errors));
             }
 
             var result = await _currencyService.UpdateCurrencyAsync(id, updateDto);

@@ -8,6 +8,8 @@ using CoinDeskApi.Infrastructure.Services;
 using CoinDeskApi.Infrastructure.Mapping;
 using CoinDeskApi.Api.Middleware;
 using CoinDeskApi.Core.Entities;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -22,6 +24,31 @@ builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// 添加多語系支援
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+// Configure supported cultures
+var supportedCultures = new[]
+{
+    new CultureInfo("en-US"),
+    new CultureInfo("zh-TW")
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("en-US");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+
+    // 設定語言提供者的優先順序
+    options.RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new QueryStringRequestCultureProvider(), // ?culture=zh-TW
+        new CookieRequestCultureProvider(),      // Cookie
+        new AcceptLanguageHeaderRequestCultureProvider() // Accept-Language header
+    };
+});
 
 // Entity Framework
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -42,6 +69,7 @@ builder.Services.AddScoped<ICurrencyRepository, CurrencyRepository>();
 builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 builder.Services.AddScoped<ICoinDeskService, CoinDeskService>();
 builder.Services.AddScoped<IEncryptionService, EncryptionService>();
+builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -84,6 +112,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseMiddleware<RequestResponseLoggingMiddleware>();
+
+// 使用多語系中介軟體
+app.UseRequestLocalization();
 
 if (app.Environment.IsDevelopment())
 {
